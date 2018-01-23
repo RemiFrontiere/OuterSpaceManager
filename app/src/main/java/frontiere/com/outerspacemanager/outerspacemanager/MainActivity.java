@@ -26,10 +26,29 @@ public class MainActivity extends AppCompatActivity {
 //        this.point.setText(mySing.getScore());
 
         Button batiments = (Button)findViewById(R.id.batimentsBtn);
+        Button galaxie = (Button)findViewById(R.id.btnGalaxie);
+        Button chantier = (Button)findViewById(R.id.btnChantier);
+
         batiments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent =  new Intent(MainActivity.this, BuildingActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        galaxie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =  new Intent(MainActivity.this, GalaxieActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        chantier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =  new Intent(MainActivity.this, ChantierSpatialActivity.class);
                 startActivity(intent);
             }
         });

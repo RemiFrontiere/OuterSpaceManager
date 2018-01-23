@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="frontiere.com.outerspacemanager.outerspacemanager.SignUpActivity">
+    tools:context="frontiere.com.outerspacemanager.outerspacemanager.SignInActivity">
 
     <LinearLayout
         android:layout_width="378dp"
@@ -62,36 +62,20 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            tools:layout_editor_absoluteX="25dp">
-
-            <TextView
-                android:layout_width="25dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Email" />
-
-            <EditText
-                android:id="@+id/MailEditText"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="textPersonName" />
-
-        </LinearLayout>
-
         <Button
             android:id="@+id/btValider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Créer"
+            android:text="Valider"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/btCreate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Pas de compte ?"
             android:textAlignment="center" />
     </LinearLayout>
-
 </android.support.constraint.ConstraintLayout>
