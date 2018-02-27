@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,9 +40,10 @@ public class GalaxieActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Users> call, Response<Users> response) {
                 Log.i("Alo SINGLETON TOKEN", mySingleton.getMyToken());
-                if(response != null){
-//                    Log.i("Alo RESPONSE IS", response.message());
-//                    Log.i("Alo RESPONSE IS", response.body().getSize().toString());
+                Log.i("Alo RESPONSE IS", response.message());
+
+                if(response.isSuccessful()){
+
 
                         List<User> users = new ArrayList<>();
 
@@ -51,12 +53,15 @@ public class GalaxieActivity extends AppCompatActivity {
 
                         mySingleton.setMyUsers(users);
 
-                    Adapter adapter = new Adapter(GalaxieActivity.this,mySingleton.getMyBuildings());
+                    AdapterGalaxie adapter = new AdapterGalaxie(GalaxieActivity.this, users);
                     listView.setAdapter(adapter);
-
-
                     ArrayAdapter<User> myadapter = new ArrayAdapter<User>(GalaxieActivity.this, android.R.layout.simple_list_item_1, users );
                     listView.setAdapter(adapter);
+                }
+                else
+                {
+                    Toast.makeText(GalaxieActivity.this, (String)response.message(),
+                            Toast.LENGTH_LONG).show();
                 }
 
                 if (response.code() != 200) {

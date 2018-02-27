@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -54,7 +55,7 @@ public class BuildingActivity extends AppCompatActivity {
         request.enqueue(new Callback<Buildings>() {
             @Override
             public void onResponse(Call<Buildings> call, Response<Buildings> response) {
-                if(response != null){
+                if(response.isSuccessful()){
 //                    Log.i("Alo RESPONSE IS", response.message());
 //                    Log.i("Alo RESPONSE IS", response.body().getSize().toString());
 
@@ -87,13 +88,9 @@ public class BuildingActivity extends AppCompatActivity {
                     ArrayAdapter<String> myadapter = new ArrayAdapter<String>(BuildingActivity.this, android.R.layout.simple_list_item_1, prenoms );
                     listV.setAdapter(adapter);
                 }
-
-                if (response.code() != 200) {
-                    try {
-                        Log.i("erreur", response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                else {
+                    Toast.makeText(BuildingActivity.this, (String)response.message(),
+                            Toast.LENGTH_LONG).show();
                 }
             }
 

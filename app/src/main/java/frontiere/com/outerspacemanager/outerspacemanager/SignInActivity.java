@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -52,7 +53,7 @@ public class SignInActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Token> call, Response<Token> response) {
 
-                        if(response != null){
+                        if(response.isSuccessful()){
                             Log.i("Alo RESPONSE IS", response.message());
                             Log.i("Alo TOKEN",response.body().getToken());
                             mySingleton.setUser(myUser.getUsername(), myUser.getPassword(), myUser.getEmail());
@@ -61,13 +62,9 @@ public class SignInActivity extends AppCompatActivity {
                             Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                             startActivity(intent);
                         }
-
-                        if (response.code() != 200) {
-                            try {
-                                Log.i("erreur", response.errorBody().string());
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                        else{
+                            Toast.makeText(SignInActivity.this, (String)response.message(),
+                                    Toast.LENGTH_LONG).show();
                         }
                     }
 

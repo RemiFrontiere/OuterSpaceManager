@@ -22,7 +22,7 @@ public interface Manager {
     @GET("buildings/list")
     Call<Buildings> building(@Header("x-access-token") String token);
 
-    @GET("users/:from/:limit")
+    @GET("users/1/20")
     Call<Users> users(@Header("x-access-token") String token);
 
     @GET("ships")
