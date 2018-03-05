@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/background_dark"
     tools:context="frontiere.com.outerspacemanager.outerspacemanager.SignUpActivity">
 
     <LinearLayout
-        android:layout_width="378dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -29,7 +30,8 @@
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Identifiant" />
+                android:text="Identifiant"
+                android:textColor="@android:color/background_light" />
 
             <EditText
                 android:id="@+id/identifiantEditText"
@@ -37,7 +39,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textColor="@android:color/background_light" />
         </LinearLayout>
 
         <LinearLayout
@@ -50,7 +53,8 @@
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Mot de passe" />
+                android:text="Mot de passe"
+                android:textColor="@android:color/background_light" />
 
             <EditText
                 android:id="@+id/PasswordEditText"
@@ -58,7 +62,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textWebPassword" />
+                android:inputType="textWebPassword"
+                android:textColor="@android:color/background_light" />
 
         </LinearLayout>
 
@@ -73,7 +78,8 @@
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Email" />
+                android:text="Email"
+                android:textColor="@android:color/background_light" />
 
             <EditText
                 android:id="@+id/MailEditText"
@@ -81,7 +87,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textColor="@android:color/background_light" />
 
         </LinearLayout>
 

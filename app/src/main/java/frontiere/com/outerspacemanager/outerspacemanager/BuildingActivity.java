@@ -1,5 +1,6 @@
 package frontiere.com.outerspacemanager.outerspacemanager;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -7,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -109,62 +111,193 @@ public class BuildingActivity extends AppCompatActivity {
                 final Building value = (Building) parent.getItemAtPosition(position);
                 Integer level = value.getLevel() + 1;
 
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(BuildingActivity.this);
+
+                final Dialog dialog = new Dialog(BuildingActivity.this);
+                dialog.setContentView(R.layout.dialog_building);
+                dialog.setTitle("Upgrade");
+
+                TextView name = (TextView) dialog.findViewById(R.id.name);
+                TextView actual_lvl = (TextView) dialog.findViewById(R.id.actual_lvl);
+                TextView next_lvl = (TextView) dialog.findViewById(R.id.next_lvl);
+                TextView effect = (TextView) dialog.findViewById(R.id.effect);
+                TextView timeToBuild = (TextView) dialog.findViewById(R.id.timeToBuild);
+                TextView mineral_cost = (TextView) dialog.findViewById(R.id.mineral_cost);
+                TextView gaz_cost = (TextView) dialog.findViewById(R.id.gaz_cost);
+                name.setText(value.getName());
+                actual_lvl.setText("Level " + value.getLevel().toString());
+                Integer nextLvl = value.getLevel() + 1;
+                next_lvl.setText("Level " + nextLvl.toString());
+                effect.setText("Effect : " + value.getEffect());
+                timeToBuild.setText("Building Time : " + value.getTimeToBuildByLevel().toString());
+                mineral_cost.setText("Mineral : " + value.getMineralCostByLevel().toString());
+                gaz_cost.setText("Gaz : " + value.getGasCostByLevel().toString());
+
+                Button ok = (Button)dialog.findViewById(R.id.ok);
+                Button cancel = (Button)dialog.findViewById(R.id.cancel);
+
+                ok.setOnClickListener(new View.OnClickListener() {
+                                          @Override
+                                          public void onClick(View v) {
+                                              retrofit2.Retrofit retrofit = new retrofit2.Retrofit.Builder()
+                                                      .baseUrl("https://outer-space-manager.herokuapp.com/api/v1/")
+                                                      .addConverterFactory(GsonConverterFactory.create())
+                                                      .build();
+                                              Manager service = retrofit.create(Manager.class);
+                                              Call<Buildings> request = service.createbuilding(mySingleton.getMyToken(), value.getBuildingId().toString());
+                                              Log.i("Alo BUILDINGID IS", value.getBuildingId().toString());
+
+                                              request.enqueue(new Callback<Buildings>() {
+                                                  @Override
+                                                  public void onResponse(Call<Buildings> call, Response<Buildings> response) {
+
+                                                      if(response.isSuccessful()){
+                                                          Log.i("Alo RESPONSE IS", response.message());
+                                                      }
+                                                      else{
+                                                          Toast.makeText(BuildingActivity.this, (String)response.message(),
+                                                                  Toast.LENGTH_LONG).show();
+                                                      }
+                                                  }
+
+                                                  @Override
+                                                  public void onFailure(Call<Buildings> call, Throwable t) {
+
+                                                  }
+                                              });
+                                          }
+                                      });
+
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                   dialog.cancel();
+                    }
+                });
 
 
-                builder1.setMessage("Monter au niveau " + level + " ?");
-                builder1.setCancelable(true);
 
-                builder1.setPositiveButton(
-                        "Oui",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                retrofit2.Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                                        .baseUrl("https://outer-space-manager.herokuapp.com/api/v1/")
-                                        .addConverterFactory(GsonConverterFactory.create())
-                                        .build();
-                                Manager service = retrofit.create(Manager.class);
-                                Call<Buildings> request = service.createbuilding(mySingleton.getMyToken(), value.getBuildingId().toString() );
-                                Log.i("Alo BUILDINGID IS", value.getBuildingId().toString());
+//                Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+////                // if button is clicked, close the custom dialog
+//                dialogButton.setOnClickListener(new OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        dialog.dismiss();
+//                    }
+//                });
 
-                                request.enqueue(new Callback<Buildings>() {
-                                    @Override
-                                    public void onResponse(Call<Buildings> call, Response<Buildings> response) {
-                                        if(response != null){
-                                            Log.i("Alo RESPONSE IS", response.message());
-                                        }
 
-                                        if (response.errorBody() != null) {
-                                            try {
-                                                Log.i("erreur", response.errorBody().string());
-                                            } catch (IOException e) {
-                                                e.printStackTrace();
-                                            }
-                                        }
-                                    }
+//
+//
+//                AlertDialog.Builder builder = new AlertDialog.Builder(BuildingActivity.this);
+//                LayoutInflater inflater = BuildingActivity.this.getLayoutInflater();
+//                builder.setView(inflater.inflate(R.layout.dialog_building, null))
+//                        .setPositiveButton(
+//                                "Oui",
+//                                new DialogInterface.OnClickListener() {
+//                                    public void onClick(DialogInterface dialog, int id) {
+//                                        retrofit2.Retrofit retrofit = new retrofit2.Retrofit.Builder()
+//                                                .baseUrl("https://outer-space-manager.herokuapp.com/api/v1/")
+//                                                .addConverterFactory(GsonConverterFactory.create())
+//                                                .build();
+//                                        Manager service = retrofit.create(Manager.class);
+//                                        Call<Buildings> request = service.createbuilding(mySingleton.getMyToken(), value.getBuildingId().toString() );
+//                                        Log.i("Alo BUILDINGID IS", value.getBuildingId().toString());
+//
+//                                        request.enqueue(new Callback<Buildings>() {
+//                                            @Override
+//                                            public void onResponse(Call<Buildings> call, Response<Buildings> response) {
+//                                                if(response != null){
+//                                                    Log.i("Alo RESPONSE IS", response.message());
+//                                                }
+//
+//                                                if (response.errorBody() != null) {
+//                                                    try {
+//                                                        Log.i("erreur", response.errorBody().string());
+//                                                    } catch (IOException e) {
+//                                                        e.printStackTrace();
+//                                                    }
+//                                                }
+//                                            }
+//
+//                                            @Override
+//                                            public void onFailure(Call<Buildings> call, Throwable t) {
+//
+//                                            }
+//                                        });
+//
+//                                        dialog.cancel();
+//                                    }
+//                                })
+//                            .setNegativeButton(
+//                            "Non",
+//                            new DialogInterface.OnClickListener() {
+//                                public void onClick(DialogInterface dialog, int id) {
+//                                    dialog.cancel();
+//                                }
+//                            });
+////
+//                             AlertDialog alert11 = builder.create();
+                             dialog.show();
+//
+//                AlertDialog.Builder builder1 = new AlertDialog.Builder(BuildingActivity.this);
+//
+//
+//                builder1.setMessage("Monter au niveau " + level + " ?");
+//                builder1.setCancelable(true);
 
-                                    @Override
-                                    public void onFailure(Call<Buildings> call, Throwable t) {
+//                builder1.setPositiveButton(
+//                        "Oui",
+//                        new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int id) {
+//                                retrofit2.Retrofit retrofit = new retrofit2.Retrofit.Builder()
+//                                        .baseUrl("https://outer-space-manager.herokuapp.com/api/v1/")
+//                                        .addConverterFactory(GsonConverterFactory.create())
+//                                        .build();
+//                                Manager service = retrofit.create(Manager.class);
+//                                Call<Buildings> request = service.createbuilding(mySingleton.getMyToken(), value.getBuildingId().toString() );
+//                                Log.i("Alo BUILDINGID IS", value.getBuildingId().toString());
+//
+//                                request.enqueue(new Callback<Buildings>() {
+//                                    @Override
+//                                    public void onResponse(Call<Buildings> call, Response<Buildings> response) {
+//                                        if(response != null){
+//                                            Log.i("Alo RESPONSE IS", response.message());
+//                                        }
+//
+//                                        if (response.errorBody() != null) {
+//                                            try {
+//                                                Log.i("erreur", response.errorBody().string());
+//                                            } catch (IOException e) {
+//                                                e.printStackTrace();
+//                                            }
+//                                        }
+//                                    }
+//
+//                                    @Override
+//                                    public void onFailure(Call<Buildings> call, Throwable t) {
+//
+//                                    }
+//                                });
+//
+//                                dialog.cancel();
+//                            }
+//                        });
 
-                                    }
-                                });
-
-                                dialog.cancel();
-                            }
-                        });
-
-                builder1.setNegativeButton(
-                        "Non",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-
-                AlertDialog alert11 = builder1.create();
-                alert11.show();
+//                builder1.setNegativeButton(
+//                        "Non",
+//                        new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int id) {
+//                                dialog.cancel();
+//                            }
+//                        });
+//
+//                AlertDialog alert11 = builder1.create();
+//                alert11.show();
 
             }
         });
     }
+
 }
+
+

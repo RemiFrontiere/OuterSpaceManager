@@ -20,6 +20,7 @@ import java.net.URI;
 import java.net.URL;
 import java.util.List;
 
+
 /**
  * Created by rfrontiere on 23/01/2018.
  */
@@ -51,6 +52,7 @@ public class Adapter extends ArrayAdapter<Building> {
         viewHolder.name.setText(building.name);
         viewHolder.level.setText(building.level.toString());
         new DownLoadImageTask(viewHolder.img).execute(building.imageUrl);
+        //GlideApp.with(this).load("http://goo.gl/gEgYUd").into(imageView);
 
         return convertView;
     }
