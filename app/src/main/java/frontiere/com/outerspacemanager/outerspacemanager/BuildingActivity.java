@@ -107,72 +107,79 @@ public class BuildingActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 
-
                 final Building value = (Building) parent.getItemAtPosition(position);
-                Integer level = value.getLevel() + 1;
+
+                if(value.getLevel() != null){
+                    Integer level = value.getLevel() + 1;
 
 
-                final Dialog dialog = new Dialog(BuildingActivity.this);
-                dialog.setContentView(R.layout.dialog_building);
-                dialog.setTitle("Upgrade");
+                    final Dialog dialog = new Dialog(BuildingActivity.this);
+                    dialog.setContentView(R.layout.dialog_building);
+                    dialog.setTitle("Upgrade");
 
-                TextView name = (TextView) dialog.findViewById(R.id.name);
-                TextView actual_lvl = (TextView) dialog.findViewById(R.id.actual_lvl);
-                TextView next_lvl = (TextView) dialog.findViewById(R.id.next_lvl);
-                TextView effect = (TextView) dialog.findViewById(R.id.effect);
-                TextView timeToBuild = (TextView) dialog.findViewById(R.id.timeToBuild);
-                TextView mineral_cost = (TextView) dialog.findViewById(R.id.mineral_cost);
-                TextView gaz_cost = (TextView) dialog.findViewById(R.id.gaz_cost);
-                name.setText(value.getName());
-                actual_lvl.setText("Level " + value.getLevel().toString());
-                Integer nextLvl = value.getLevel() + 1;
-                next_lvl.setText("Level " + nextLvl.toString());
-                effect.setText("Effect : " + value.getEffect());
-                timeToBuild.setText("Building Time : " + value.getTimeToBuildByLevel().toString());
-                mineral_cost.setText("Mineral : " + value.getMineralCostByLevel().toString());
-                gaz_cost.setText("Gaz : " + value.getGasCostByLevel().toString());
+                    TextView name = (TextView) dialog.findViewById(R.id.name);
+                    TextView actual_lvl = (TextView) dialog.findViewById(R.id.actual_lvl);
+                    TextView next_lvl = (TextView) dialog.findViewById(R.id.next_lvl);
+                    TextView effect = (TextView) dialog.findViewById(R.id.effect);
+                    TextView timeToBuild = (TextView) dialog.findViewById(R.id.timeToBuild);
+                    TextView mineral_cost = (TextView) dialog.findViewById(R.id.mineral_cost);
+                    TextView gaz_cost = (TextView) dialog.findViewById(R.id.gaz_cost);
+                    name.setText(value.getName());
+                    actual_lvl.setText("Level " + value.getLevel().toString());
+                    Integer nextLvl = value.getLevel() + 1;
+                    next_lvl.setText("Level " + nextLvl.toString());
+                    effect.setText("Effect : " + value.getEffect());
+                    timeToBuild.setText("Building Time : " + value.getTimeToBuildByLevel().toString());
+                    mineral_cost.setText("Mineral : " + value.getMineralCostByLevel().toString());
+                    gaz_cost.setText("Gaz : " + value.getGasCostByLevel().toString());
 
-                Button ok = (Button)dialog.findViewById(R.id.ok);
-                Button cancel = (Button)dialog.findViewById(R.id.cancel);
+                    Button ok = (Button)dialog.findViewById(R.id.ok);
+                    Button cancel = (Button)dialog.findViewById(R.id.cancel);
 
-                ok.setOnClickListener(new View.OnClickListener() {
-                                          @Override
-                                          public void onClick(View v) {
-                                              retrofit2.Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                                                      .baseUrl("https://outer-space-manager.herokuapp.com/api/v1/")
-                                                      .addConverterFactory(GsonConverterFactory.create())
-                                                      .build();
-                                              Manager service = retrofit.create(Manager.class);
-                                              Call<Buildings> request = service.createbuilding(mySingleton.getMyToken(), value.getBuildingId().toString());
-                                              Log.i("Alo BUILDINGID IS", value.getBuildingId().toString());
+                    ok.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            retrofit2.Retrofit retrofit = new retrofit2.Retrofit.Builder()
+                                    .baseUrl("https://outer-space-manager.herokuapp.com/api/v1/")
+                                    .addConverterFactory(GsonConverterFactory.create())
+                                    .build();
+                            Manager service = retrofit.create(Manager.class);
+                            Call<Buildings> request = service.createbuilding(mySingleton.getMyToken(), value.getBuildingId().toString());
+                            Log.i("Alo BUILDINGID IS", value.getBuildingId().toString());
 
-                                              request.enqueue(new Callback<Buildings>() {
-                                                  @Override
-                                                  public void onResponse(Call<Buildings> call, Response<Buildings> response) {
+                            request.enqueue(new Callback<Buildings>() {
+                                @Override
+                                public void onResponse(Call<Buildings> call, Response<Buildings> response) {
 
-                                                      if(response.isSuccessful()){
-                                                          Log.i("Alo RESPONSE IS", response.message());
-                                                      }
-                                                      else{
-                                                          Toast.makeText(BuildingActivity.this, (String)response.message(),
-                                                                  Toast.LENGTH_LONG).show();
-                                                      }
-                                                  }
+                                    if(response.isSuccessful()){
+                                        Toast.makeText(BuildingActivity.this, (String)response.message(),
+                                                Toast.LENGTH_LONG).show();
+                                    }
+                                    else{
+                                        Toast.makeText(BuildingActivity.this, (String)response.message(),
+                                                Toast.LENGTH_LONG).show();
+                                    }
+                                }
 
-                                                  @Override
-                                                  public void onFailure(Call<Buildings> call, Throwable t) {
+                                @Override
+                                public void onFailure(Call<Buildings> call, Throwable t) {
 
-                                                  }
-                                              });
-                                          }
-                                      });
+                                }
+                            });
+                            dialog.cancel();
+                        }
+                    });
 
-                cancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                   dialog.cancel();
-                    }
-                });
+                    cancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.cancel();
+                        }
+                    });
+
+                    dialog.show();
+                }
+
 
 
 
@@ -237,7 +244,7 @@ public class BuildingActivity extends AppCompatActivity {
 //                            });
 ////
 //                             AlertDialog alert11 = builder.create();
-                             dialog.show();
+
 //
 //                AlertDialog.Builder builder1 = new AlertDialog.Builder(BuildingActivity.this);
 //

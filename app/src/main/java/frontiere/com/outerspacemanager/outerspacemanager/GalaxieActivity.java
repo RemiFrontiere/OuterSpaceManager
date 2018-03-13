@@ -49,6 +49,10 @@ public class GalaxieActivity extends AppCompatActivity {
 
                         for(int i = 0; i < response.body().getUsers().size(); i++){
                             users.add(new User(response.body().getUsers().get(i).getUsername(),response.body().getUsers().get(i).getScore()));
+                            Log.i("Alo RESPONSE IS", response.body().getUsers().get(i).getUsername());
+
+                            if(response.body().getUsers().get(i).getScore()!= null)
+                                Log.i("Alo RESPONSE IS", response.body().getUsers().get(i).getScore().toString());
                         }
 
                         mySingleton.setMyUsers(users);

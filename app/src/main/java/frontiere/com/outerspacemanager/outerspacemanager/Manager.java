@@ -22,6 +22,9 @@ public interface Manager {
     @GET("buildings/list")
     Call<Buildings> building(@Header("x-access-token") String token);
 
+    @GET("users/get")
+    Call<UserGet> getUser(@Header("x-access-token") String token);
+
     @GET("users/1/20")
     Call<Users> users(@Header("x-access-token") String token);
 

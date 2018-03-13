@@ -14,6 +14,12 @@ public final class Singleton {
     private String password;
     private String mail;
     private Integer score;
+
+    private Integer myGaz;
+    private Integer myMineral;
+
+    private UserGet myUser;
+
     private String myToken = "";
     private List<Building> myBuildings;
     private List<User> myUsers;
@@ -52,6 +58,38 @@ public final class Singleton {
     public void setMyToken(String token) {
         if(token != null){
             this.myToken = token;
+        }
+    }
+    public Integer getMyMineral() {
+        return this.myMineral;
+    }
+
+
+    public void setMyMineral(Integer mineral) {
+        if(mineral != null){
+            this.myMineral = myMineral;
+        }
+    }
+
+    public UserGet getMyUser() {
+        return this.myUser;
+    }
+
+
+    public void setMyUser(UserGet user) {
+        if(user != null){
+            this.myUser = user;
+        }
+    }
+
+
+    public Integer getMygaz() {
+        return this.myGaz;
+    }
+
+    public void setMygaz(Integer gaz) {
+        if(gaz != null){
+            this.myGaz = gaz;
         }
     }
     public String getMyToken() {

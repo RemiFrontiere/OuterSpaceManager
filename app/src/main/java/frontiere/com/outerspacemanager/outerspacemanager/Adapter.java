@@ -50,7 +50,14 @@ public class Adapter extends ArrayAdapter<Building> {
         //getItem(position) va récupérer l'item [position] de la List<Tweet> tweets
         Building building = getItem(position);
         viewHolder.name.setText(building.name);
-        viewHolder.level.setText(building.level.toString());
+
+        if(building.level != null){
+            viewHolder.level.setText(building.level.toString());
+        }
+        else{
+            viewHolder.level.setText("Upgrading");
+        }
+
         new DownLoadImageTask(viewHolder.img).execute(building.imageUrl);
         //GlideApp.with(this).load("http://goo.gl/gEgYUd").into(imageView);
 
