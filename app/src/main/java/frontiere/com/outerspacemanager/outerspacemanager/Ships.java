@@ -68,7 +68,8 @@ class Ship{
     private Integer shipId;
     private Integer spatioportLevelNeeded;
     private Integer speed;
-    private  Integer timeToBuild;
+    private Integer timeToBuild;
+    private Integer amount;
 
     public Ship(
             Integer gasCost,
@@ -173,6 +174,13 @@ class Ship{
 
     public Integer getSpeed() {
         return speed;
+    }
+
+    public Integer getAmount() {
+        return amount;
+    }
+    public void setAmount(Integer amount) {
+        this.amount = amount;
     }
 
     public void setSpeed(Integer speed) {

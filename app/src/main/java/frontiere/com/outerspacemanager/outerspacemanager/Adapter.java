@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.io.InputStream;
@@ -44,6 +45,7 @@ public class Adapter extends ArrayAdapter<Building> {
             viewHolder.name = (TextView) convertView.findViewById(R.id.name);
             viewHolder.level = (TextView) convertView.findViewById(R.id.level);
             viewHolder.img = (ImageView) convertView.findViewById(R.id.img);
+            viewHolder.building = (TextView) convertView.findViewById(R.id.building);
             convertView.setTag(viewHolder);
         }
 
@@ -51,12 +53,25 @@ public class Adapter extends ArrayAdapter<Building> {
         Building building = getItem(position);
         viewHolder.name.setText(building.name);
 
+        int totalTime = building.getTimeToBuildLevel0() + (building.getAmountOfEffectByLevel()*building.getLevel());
+//
+//        viewHolder.progressBar.setProgress();
+
         if(building.level != null){
             viewHolder.level.setText(building.level.toString());
         }
         else{
             viewHolder.level.setText("Upgrading");
         }
+
+        if(building.getBuilding() != true){
+            viewHolder.building.setText("Prêt à construire !");
+        }
+        else{
+            viewHolder.building.setText("En cours de construction !");
+            viewHolder.level.setText(building.level.toString() + "-->" + (building.level + 1));
+        }
+
 
         new DownLoadImageTask(viewHolder.img).execute(building.imageUrl);
         //GlideApp.with(this).load("http://goo.gl/gEgYUd").into(imageView);
@@ -68,6 +83,7 @@ public class Adapter extends ArrayAdapter<Building> {
         public TextView name;
         public TextView level;
         public ImageView img;
+        public TextView building;
     }
 }
 

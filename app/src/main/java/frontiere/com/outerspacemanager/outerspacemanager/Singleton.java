@@ -24,6 +24,10 @@ public final class Singleton {
     private List<Building> myBuildings;
     private List<User> myUsers;
 
+
+//    private time
+
+
     private Singleton() {
         super();
     }

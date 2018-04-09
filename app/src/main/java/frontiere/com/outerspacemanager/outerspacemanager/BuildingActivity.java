@@ -108,7 +108,6 @@ public class BuildingActivity extends AppCompatActivity {
 
 
                 final Building value = (Building) parent.getItemAtPosition(position);
-
                 if(value.getLevel() != null){
                     Integer level = value.getLevel() + 1;
 
@@ -129,12 +128,16 @@ public class BuildingActivity extends AppCompatActivity {
                     Integer nextLvl = value.getLevel() + 1;
                     next_lvl.setText("Level " + nextLvl.toString());
                     effect.setText("Effect : " + value.getEffect());
-                    timeToBuild.setText("Building Time : " + value.getTimeToBuildByLevel().toString());
-                    mineral_cost.setText("Mineral : " + value.getMineralCostByLevel().toString());
-                    gaz_cost.setText("Gaz : " + value.getGasCostByLevel().toString());
+                    timeToBuild.setText("Building Time : " + (value.getTimeToBuildLevel0() + value.getTimeToBuildByLevel() + value.getLevel()) );
+                    mineral_cost.setText("Mineral : " + (value.getMineralCostLevel0() + value.getMineralCostByLevel() + value.getLevel()));
+                    gaz_cost.setText("Gaz : " + (value.getGasCostLevel0() + value.getGasCostByLevel() + value.getLevel()));
 
                     Button ok = (Button)dialog.findViewById(R.id.ok);
                     Button cancel = (Button)dialog.findViewById(R.id.cancel);
+
+                    if(value.getBuilding()){
+                        ok.setEnabled(false);
+                    }
 
                     ok.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -152,8 +155,70 @@ public class BuildingActivity extends AppCompatActivity {
                                 public void onResponse(Call<Buildings> call, Response<Buildings> response) {
 
                                     if(response.isSuccessful()){
-                                        Toast.makeText(BuildingActivity.this, (String)response.message(),
+                                        Toast.makeText(BuildingActivity.this, "La construction est lancée !",
                                                 Toast.LENGTH_LONG).show();
+
+
+
+                                        retrofit2.Retrofit retrofit = new retrofit2.Retrofit.Builder()
+                                                .baseUrl("https://outer-space-manager.herokuapp.com/api/v1/")
+                                                .addConverterFactory(GsonConverterFactory.create())
+                                                .build();
+                                        Manager service = retrofit.create(Manager.class);
+                                        Call<Buildings> request = service.building(mySingleton.getMyToken());
+
+
+                                        request.enqueue(new Callback<Buildings>() {
+                                            @Override
+                                            public void onResponse(Call<Buildings> call, Response<Buildings> response) {
+                                                if(response.isSuccessful()){
+//                    Log.i("Alo RESPONSE IS", response.message());
+//                    Log.i("Alo RESPONSE IS", response.body().getSize().toString());
+
+                                                    List<Building> buildings = new ArrayList<>();
+
+                                                    for(int i = 0; i < response.body().buildings.size(); i++){
+                                                        buildings.add(new Building(
+                                                                response.body().buildings.get(i).getLevel(),
+                                                                response.body().buildings.get(i).getAmountOfEffectByLevel(),
+                                                                response.body().buildings.get(i).getAmountOfEffectLevel0(),
+                                                                response.body().buildings.get(i).getBuildingId(),
+                                                                response.body().buildings.get(i).getBuilding(),
+                                                                response.body().buildings.get(i).getEffect(),
+                                                                response.body().buildings.get(i).getGasCostByLevel(),
+                                                                response.body().buildings.get(i).getGasCostLevel0(),
+                                                                response.body().buildings.get(i).getImageUrl(),
+                                                                response.body().buildings.get(i).getMineralCostByLevel(),
+                                                                response.body().buildings.get(i).getMineralCostLevel0(),
+                                                                response.body().buildings.get(i).getName(),
+                                                                response.body().buildings.get(i).getTimeToBuildByLevel(),
+                                                                response.body().buildings.get(i).getTimeToBuildLevel0()
+                                                        ));
+                                                        mySingleton.setMyBuildings(buildings);
+                                                    }
+
+                                                    Adapter adapter = new Adapter(BuildingActivity.this,mySingleton.getMyBuildings());
+                                                    listV.setAdapter(adapter);
+
+
+                                                    ArrayAdapter<String> myadapter = new ArrayAdapter<String>(BuildingActivity.this, android.R.layout.simple_list_item_1, prenoms );
+                                                    listV.setAdapter(adapter);
+                                                }
+                                                else {
+                                                    Toast.makeText(BuildingActivity.this, (String)response.message(),
+                                                            Toast.LENGTH_LONG).show();
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<Buildings> call, Throwable t) {
+
+                                            }
+                                        });
+
+
+
+
                                     }
                                     else{
                                         Toast.makeText(BuildingActivity.this, (String)response.message(),

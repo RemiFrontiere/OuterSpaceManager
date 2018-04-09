@@ -33,4 +33,14 @@
         android:textSize="18sp"
         tools:text="Texte de mon tweet" />
 
+    <TextView
+        android:id="@+id/building"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/img"
+        android:layout_alignLeft="@+id/level"
+        android:layout_alignStart="@+id/level"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        tools:text="Texte de mon tweet" />
 </RelativeLayout>

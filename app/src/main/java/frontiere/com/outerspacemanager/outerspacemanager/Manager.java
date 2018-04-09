@@ -4,6 +4,8 @@ package frontiere.com.outerspacemanager.outerspacemanager;
  * Created by rfrontiere on 23/01/2018.
  */
 
+import java.util.HashMap;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -33,6 +35,12 @@ public interface Manager {
 
     @POST("buildings/create/{buildingId}")
     Call<Buildings> createbuilding(@Header("x-access-token") String token, @Path("buildingId") String buildingId);
+
+    @POST("ships/create/{shipId}")
+    Call<Ships> createship(@Header("x-access-token") String token, @Path("shipId") String shipId, @Body HashMap<String, String> amount );
+
+    @GET("fleet/list")
+    Call<Fleet> getFleet(@Header("x-access-token") String token);
 
 
 }
