@@ -19,11 +19,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".BuildingActivity" />
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".GalaxieActivity" />
-        <activity android:name=".GeneralActivity" />
-        <activity android:name=".ChantierSpatialActivity"></activity>
+        <activity android:label="Buildings" android:name=".BuildingActivity" />
+        <activity android:label="Outer Space Manager" android:name=".SignUpActivity" />
+        <activity android:label="Galaxy" android:name=".GalaxieActivity" />
+        <activity android:label="General View" android:name=".GeneralActivity" />
+        <!--<activity android:name=".FleetActivity" />-->
+        <activity android:label="Space Shipyard" android:name=".ChantierSpatialActivity"></activity>
     </application>
 
 </manifest>

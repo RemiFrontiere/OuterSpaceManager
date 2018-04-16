@@ -27,7 +27,7 @@ public interface Manager {
     @GET("users/get")
     Call<UserGet> getUser(@Header("x-access-token") String token);
 
-    @GET("users/1/20")
+    @GET("users/0/20")
     Call<Users> users(@Header("x-access-token") String token);
 
     @GET("ships")

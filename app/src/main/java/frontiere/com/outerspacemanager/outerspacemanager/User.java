@@ -9,9 +9,9 @@ class User {
     private String email;
     private String username;
     private String password;
-    private Double score;
+    private Integer score;
 
-    public User(String username, Double score) {
+    public User(String username, Integer score) {
         this.username = username;
         this.score = score;
     }
@@ -51,11 +51,11 @@ class User {
     }
 
 
-    public Double getScore() {
+    public Integer getScore() {
         return this.score;
     }
 
-    public void setScore(Double score) {
+    public void setScore(Integer score) {
         this.score = score;
     }
 

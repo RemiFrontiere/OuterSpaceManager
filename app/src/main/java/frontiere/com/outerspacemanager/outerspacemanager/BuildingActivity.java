@@ -1,24 +1,17 @@
 package frontiere.com.outerspacemanager.outerspacemanager;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Build;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +32,9 @@ public class BuildingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_building);
+
 
 
 
@@ -47,7 +42,7 @@ public class BuildingActivity extends AppCompatActivity {
         this.listV = (ListView) findViewById(R.id.listV);
 
         retrofit2.Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                .baseUrl("https://outer-space-manager.herokuapp.com/api/v1/")
+                .baseUrl("https://outer-space-manager-staging.herokuapp.com/api/v1/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Manager service = retrofit.create(Manager.class);
@@ -128,9 +123,16 @@ public class BuildingActivity extends AppCompatActivity {
                     Integer nextLvl = value.getLevel() + 1;
                     next_lvl.setText("Level " + nextLvl.toString());
                     effect.setText("Effect : " + value.getEffect());
-                    timeToBuild.setText("Building Time : " + (value.getTimeToBuildLevel0() + value.getTimeToBuildByLevel() + value.getLevel()) );
-                    mineral_cost.setText("Mineral : " + (value.getMineralCostLevel0() + value.getMineralCostByLevel() + value.getLevel()));
-                    gaz_cost.setText("Gaz : " + (value.getGasCostLevel0() + value.getGasCostByLevel() + value.getLevel()));
+
+                    int hours = (value.getTimeToBuildLevel0() + value.getTimeToBuildByLevel() * value.getLevel()) / 3600;
+                    int minutes = ((value.getTimeToBuildLevel0() + value.getTimeToBuildByLevel() * value.getLevel()) % 3600) / 60;
+                    int seconds = (value.getTimeToBuildLevel0() + value.getTimeToBuildByLevel() * value.getLevel()) % 60;
+
+                    String timeString = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+
+                    timeToBuild.setText("Building Time : " +  timeString );
+                    mineral_cost.setText("Mineral : " + (value.getMineralCostLevel0() + value.getMineralCostByLevel() * value.getLevel()));
+                    gaz_cost.setText("Gaz : " + (value.getGasCostLevel0() + value.getGasCostByLevel() * value.getLevel()));
 
                     Button ok = (Button)dialog.findViewById(R.id.ok);
                     Button cancel = (Button)dialog.findViewById(R.id.cancel);
@@ -143,7 +145,7 @@ public class BuildingActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             retrofit2.Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                                    .baseUrl("https://outer-space-manager.herokuapp.com/api/v1/")
+                                    .baseUrl("https://outer-space-manager-staging.herokuapp.com/api/v1/")
                                     .addConverterFactory(GsonConverterFactory.create())
                                     .build();
                             Manager service = retrofit.create(Manager.class);
@@ -161,7 +163,7 @@ public class BuildingActivity extends AppCompatActivity {
 
 
                                         retrofit2.Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                                                .baseUrl("https://outer-space-manager.herokuapp.com/api/v1/")
+                                                .baseUrl("https://outer-space-manager-staging.herokuapp.com/api/v1/")
                                                 .addConverterFactory(GsonConverterFactory.create())
                                                 .build();
                                         Manager service = retrofit.create(Manager.class);
@@ -215,13 +217,9 @@ public class BuildingActivity extends AppCompatActivity {
 
                                             }
                                         });
-
-
-
-
                                     }
                                     else{
-                                        Toast.makeText(BuildingActivity.this, (String)response.message(),
+                                        Toast.makeText(BuildingActivity.this, "Ressources insuffisantes !",
                                                 Toast.LENGTH_LONG).show();
                                     }
                                 }
@@ -244,128 +242,6 @@ public class BuildingActivity extends AppCompatActivity {
 
                     dialog.show();
                 }
-
-
-
-
-//                Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
-////                // if button is clicked, close the custom dialog
-//                dialogButton.setOnClickListener(new OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        dialog.dismiss();
-//                    }
-//                });
-
-
-//
-//
-//                AlertDialog.Builder builder = new AlertDialog.Builder(BuildingActivity.this);
-//                LayoutInflater inflater = BuildingActivity.this.getLayoutInflater();
-//                builder.setView(inflater.inflate(R.layout.dialog_building, null))
-//                        .setPositiveButton(
-//                                "Oui",
-//                                new DialogInterface.OnClickListener() {
-//                                    public void onClick(DialogInterface dialog, int id) {
-//                                        retrofit2.Retrofit retrofit = new retrofit2.Retrofit.Builder()
-//                                                .baseUrl("https://outer-space-manager.herokuapp.com/api/v1/")
-//                                                .addConverterFactory(GsonConverterFactory.create())
-//                                                .build();
-//                                        Manager service = retrofit.create(Manager.class);
-//                                        Call<Buildings> request = service.createbuilding(mySingleton.getMyToken(), value.getBuildingId().toString() );
-//                                        Log.i("Alo BUILDINGID IS", value.getBuildingId().toString());
-//
-//                                        request.enqueue(new Callback<Buildings>() {
-//                                            @Override
-//                                            public void onResponse(Call<Buildings> call, Response<Buildings> response) {
-//                                                if(response != null){
-//                                                    Log.i("Alo RESPONSE IS", response.message());
-//                                                }
-//
-//                                                if (response.errorBody() != null) {
-//                                                    try {
-//                                                        Log.i("erreur", response.errorBody().string());
-//                                                    } catch (IOException e) {
-//                                                        e.printStackTrace();
-//                                                    }
-//                                                }
-//                                            }
-//
-//                                            @Override
-//                                            public void onFailure(Call<Buildings> call, Throwable t) {
-//
-//                                            }
-//                                        });
-//
-//                                        dialog.cancel();
-//                                    }
-//                                })
-//                            .setNegativeButton(
-//                            "Non",
-//                            new DialogInterface.OnClickListener() {
-//                                public void onClick(DialogInterface dialog, int id) {
-//                                    dialog.cancel();
-//                                }
-//                            });
-////
-//                             AlertDialog alert11 = builder.create();
-
-//
-//                AlertDialog.Builder builder1 = new AlertDialog.Builder(BuildingActivity.this);
-//
-//
-//                builder1.setMessage("Monter au niveau " + level + " ?");
-//                builder1.setCancelable(true);
-
-//                builder1.setPositiveButton(
-//                        "Oui",
-//                        new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int id) {
-//                                retrofit2.Retrofit retrofit = new retrofit2.Retrofit.Builder()
-//                                        .baseUrl("https://outer-space-manager.herokuapp.com/api/v1/")
-//                                        .addConverterFactory(GsonConverterFactory.create())
-//                                        .build();
-//                                Manager service = retrofit.create(Manager.class);
-//                                Call<Buildings> request = service.createbuilding(mySingleton.getMyToken(), value.getBuildingId().toString() );
-//                                Log.i("Alo BUILDINGID IS", value.getBuildingId().toString());
-//
-//                                request.enqueue(new Callback<Buildings>() {
-//                                    @Override
-//                                    public void onResponse(Call<Buildings> call, Response<Buildings> response) {
-//                                        if(response != null){
-//                                            Log.i("Alo RESPONSE IS", response.message());
-//                                        }
-//
-//                                        if (response.errorBody() != null) {
-//                                            try {
-//                                                Log.i("erreur", response.errorBody().string());
-//                                            } catch (IOException e) {
-//                                                e.printStackTrace();
-//                                            }
-//                                        }
-//                                    }
-//
-//                                    @Override
-//                                    public void onFailure(Call<Buildings> call, Throwable t) {
-//
-//                                    }
-//                                });
-//
-//                                dialog.cancel();
-//                            }
-//                        });
-
-//                builder1.setNegativeButton(
-//                        "Non",
-//                        new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int id) {
-//                                dialog.cancel();
-//                            }
-//                        });
-//
-//                AlertDialog alert11 = builder1.create();
-//                alert11.show();
-
             }
         });
     }

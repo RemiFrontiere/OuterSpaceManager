@@ -37,6 +37,7 @@ public class AdapterShip extends ArrayAdapter<Ship> {
             viewHolder.maxAttack = (TextView) convertView.findViewById(R.id.maxAttackText);
             viewHolder.shield = (TextView) convertView.findViewById(R.id.shieldText);
             viewHolder.speed = (TextView) convertView.findViewById(R.id.speedText);
+            viewHolder.image = (ImageView) convertView.findViewById(R.id.image) ;
             convertView.setTag(viewHolder);
         }
 
@@ -51,6 +52,26 @@ public class AdapterShip extends ArrayAdapter<Ship> {
         viewHolder.life.setText("Life: "+ship.getLife().toString());
         viewHolder.shield.setText("Shield: "+ship.getShield().toString());
 
+        switch (ship.getName()){
+            case "Chasseur léger":
+                viewHolder.image.setImageResource(R.drawable.leger);
+                break;
+            case "Chasseur lourd":
+                viewHolder.image.setImageResource(R.drawable.lourd);
+                break;
+            case "Sonde d'espionnage":
+                viewHolder.image.setImageResource(R.drawable.sonde);
+                break;
+            case "Destroyer":
+                viewHolder.image.setImageResource(R.drawable.destroy);
+                break;
+            case "Etoile de la mort":
+                viewHolder.image.setImageResource(R.drawable.etoile);
+                break;
+
+        }
+
+
         return convertView;
     }
 
@@ -62,5 +83,6 @@ public class AdapterShip extends ArrayAdapter<Ship> {
         public TextView speed;
         public TextView maxAttack;
         public TextView life;
+        public ImageView image;
     }
 }

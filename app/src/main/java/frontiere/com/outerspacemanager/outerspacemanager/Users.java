@@ -8,17 +8,17 @@ import java.util.List;
 
 public class Users{
 
-    private List<User> users;
+    private List<UserG> users;
 
-    public Users(List<User> users){
+    public Users(List<UserG> users){
         this.users = users;
     }
 
-    public List<User> getUsers() {
+    public List<UserG> getUsers() {
         return this.users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(List<UserG> users) {
         this.users = users;
     }
 

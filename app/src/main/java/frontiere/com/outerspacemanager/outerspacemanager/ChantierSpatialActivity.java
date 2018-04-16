@@ -39,7 +39,7 @@ public class ChantierSpatialActivity extends AppCompatActivity {
         this.listV = (ListView) findViewById(R.id.lv);
 
         retrofit2.Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                .baseUrl("https://outer-space-manager.herokuapp.com/api/v1/")
+                .baseUrl("https://outer-space-manager-staging.herokuapp.com/api/v1/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Manager service = retrofit.create(Manager.class);
@@ -73,9 +73,9 @@ public class ChantierSpatialActivity extends AppCompatActivity {
                     }
 
 
-                    LayoutInflater inflater = getLayoutInflater();
-                    ViewGroup header = (ViewGroup) inflater.inflate(R.layout.listview_header, listV, false);
-                    listV.addHeaderView(header);
+//                    LayoutInflater inflater = getLayoutInflater();
+//                    ViewGroup header = (ViewGroup) inflater.inflate(R.layout.listview_header, listV, false);
+//                    listV.addHeaderView(header);
 
 
                     AdapterShip adapter = new AdapterShip(ChantierSpatialActivity.this, ships);
@@ -108,39 +108,25 @@ public class ChantierSpatialActivity extends AppCompatActivity {
 
                 final Ship value = (Ship) parent.getItemAtPosition(position);
                 final Dialog dialog = new Dialog(ChantierSpatialActivity.this);
-                dialog.setContentView(R.layout.dialog_building);
-                dialog.setTitle("Upgrade");
+                dialog.setContentView(R.layout.dialog_ship);
+                dialog.setTitle("Build");
 
-//                    TextView name = (TextView) dialog.findViewById(R.id.name);
-//                    TextView actual_lvl = (TextView) dialog.findViewById(R.id.actual_lvl);
-//                    TextView next_lvl = (TextView) dialog.findViewById(R.id.next_lvl);
-//                    TextView effect = (TextView) dialog.findViewById(R.id.effect);
-//                    TextView timeToBuild = (TextView) dialog.findViewById(R.id.timeToBuild);
-//                    TextView mineral_cost = (TextView) dialog.findViewById(R.id.mineral_cost);
-//                    TextView gaz_cost = (TextView) dialog.findViewById(R.id.gaz_cost);
-//                    name.setText(value.getName());
-//                    actual_lvl.setText("Level " + value.getLevel().toString());
-//                    Integer nextLvl = value.getLevel() + 1;
-//                    next_lvl.setText("Level " + nextLvl.toString());
-//                    effect.setText("Effect : " + value.getEffect());
-//                    timeToBuild.setText("Building Time : " + (value.getTimeToBuildLevel0() + value.getTimeToBuildByLevel() + value.getLevel()) );
-//                    mineral_cost.setText("Mineral : " + (value.getMineralCostLevel0() + value.getMineralCostByLevel() + value.getLevel()));
-//                    gaz_cost.setText("Gaz : " + (value.getGasCostLevel0() + value.getGasCostByLevel() + value.getLevel()));
-
-                    Button ok = (Button) dialog.findViewById(R.id.ok);
-                    Button cancel = (Button) dialog.findViewById(R.id.cancel);
+                TextView name = (TextView) dialog.findViewById(R.id.name);
+                name.setText(value.getName());
+                Button ok = (Button) dialog.findViewById(R.id.ok);
+                Button cancel = (Button) dialog.findViewById(R.id.cancel);
 
                 ok.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         retrofit2.Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                                .baseUrl("https://outer-space-manager.herokuapp.com/api/v1/")
+                                .baseUrl("https://outer-space-manager-staging.herokuapp.com/api/v1/")
                                 .addConverterFactory(GsonConverterFactory.create())
                                 .build();
                         Manager service = retrofit.create(Manager.class);
 
                         HashMap<String, String> amount = new HashMap<>();
-                        amount.put("amount", "50");
+                        amount.put("amount", "1");
 
                         Call<Ships> request = service.createship(mySingleton.getMyToken(),value.getShipId().toString(), amount);
                         Log.i("Alo BUILDINGID IS", value.getShipId().toString());

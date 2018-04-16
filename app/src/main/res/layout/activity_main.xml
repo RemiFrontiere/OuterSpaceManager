@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_dark"
+    android:background="@mipmap/background_space_2"
     tools:context="frontiere.com.outerspacemanager.outerspacemanager.MainActivity">
 
     <LinearLayout
@@ -14,7 +14,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@android:color/background_dark"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +64,10 @@
             android:id="@+id/generalBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Vue générale"
+            android:layout_marginVertical="2dp"
+            android:background="?android:attr/colorControlHighlight"
+            android:text="General View"
+            android:textColor="@android:color/background_light"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -73,23 +75,32 @@
             android:id="@+id/batimentsBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Bâtiments"
+            android:layout_marginVertical="2dp"
+            android:background="?android:attr/colorControlHighlight"
+            android:text="buildings"
+            android:textColor="@android:color/background_light"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/fleetbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Flotte"
+            android:layout_marginVertical="2dp"
+            android:background="?android:attr/colorControlHighlight"
+            android:text="Fleet"
+            android:textColor="@android:color/background_light"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/searchBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Recherches"
+            android:layout_marginVertical="2dp"
+            android:background="?android:attr/colorControlHighlight"
+            android:text="Research"
+            android:textColor="@android:color/background_light"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -97,7 +108,10 @@
             android:id="@+id/btnChantier"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Chantier spatial"
+            android:layout_marginVertical="2dp"
+            android:background="?android:attr/colorControlHighlight"
+            android:text=" Space shipyard"
+            android:textColor="@android:color/background_light"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -105,15 +119,21 @@
             android:id="@+id/btnGalaxie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Galaxie"
+            android:layout_marginVertical="2dp"
+            android:background="?android:attr/colorControlHighlight"
+            android:text="galaxy"
+            android:textColor="@android:color/background_light"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button15"
+            android:id="@+id/decobtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="2dp"
+            android:background="?android:attr/colorControlHighlight"
             android:text="Déconnection"
+            android:textColor="@android:color/background_light"
             android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>

@@ -34,10 +34,13 @@ public class MainActivity extends AppCompatActivity {
         Button galaxie = (Button)findViewById(R.id.btnGalaxie);
         Button chantier = (Button)findViewById(R.id.btnChantier);
         Button general = (Button)findViewById(R.id.generalBtn);
+        Button fleet = (Button)findViewById(R.id.fleetbtn);
+        Button deco = (Button)findViewById(R.id.decobtn);
+        Button search = (Button)findViewById(R.id.searchBtn);
 
 
         retrofit2.Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                .baseUrl("https://outer-space-manager.herokuapp.com/api/v1/")
+                .baseUrl("https://outer-space-manager-staging.herokuapp.com/api/v1/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Manager service = retrofit.create(Manager.class);
@@ -110,6 +113,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent =  new Intent(MainActivity.this, ChantierSpatialActivity.class);
+                startActivity(intent);
+            }
+        });
+        fleet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent =  new Intent(MainActivity.this, FleetActivity.class);
+//                startActivity(intent);
+            }
+        });
+        deco.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =  new Intent(MainActivity.this, SignInActivity.class);
                 startActivity(intent);
             }
         });

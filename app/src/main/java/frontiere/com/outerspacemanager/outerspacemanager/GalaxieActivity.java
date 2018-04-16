@@ -29,7 +29,7 @@ public class GalaxieActivity extends AppCompatActivity {
         this.listView = (ListView) findViewById(R.id.lv);
 
         retrofit2.Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                .baseUrl("https://outer-space-manager.herokuapp.com/api/v1/")
+                .baseUrl("https://outer-space-manager-staging.herokuapp.com/api/v1/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Manager service = retrofit.create(Manager.class);
@@ -48,11 +48,11 @@ public class GalaxieActivity extends AppCompatActivity {
                         List<User> users = new ArrayList<>();
 
                         for(int i = 0; i < response.body().getUsers().size(); i++){
-                            users.add(new User(response.body().getUsers().get(i).getUsername(),response.body().getUsers().get(i).getScore()));
+                            users.add(new User(response.body().getUsers().get(i).getUsername(), (response.body().getUsers().get(i).getPoints().intValue())));
                             Log.i("Alo RESPONSE IS", response.body().getUsers().get(i).getUsername());
 
-                            if(response.body().getUsers().get(i).getScore()!= null)
-                                Log.i("Alo RESPONSE IS", response.body().getUsers().get(i).getScore().toString());
+                            if(response.body().getUsers().get(i).getPoints()!= null)
+                                Log.i("Alo RESPONSE IS", response.body().getUsers().get(i).getPoints().toString());
                         }
 
                         mySingleton.setMyUsers(users);

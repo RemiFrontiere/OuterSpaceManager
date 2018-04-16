@@ -34,7 +34,7 @@ public class GeneralActivity extends AppCompatActivity {
         final Singleton mySing = Singleton.getInstance();
 
         retrofit2.Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                .baseUrl("https://outer-space-manager.herokuapp.com/api/v1/")
+                .baseUrl("https://outer-space-manager-staging.herokuapp.com/api/v1/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Manager service = retrofit.create(Manager.class);
@@ -85,7 +85,7 @@ public class GeneralActivity extends AppCompatActivity {
 
 
         retrofit = new retrofit2.Retrofit.Builder()
-                .baseUrl("https://outer-space-manager.herokuapp.com/api/v1/")
+                .baseUrl("https://outer-space-manager-staging.herokuapp.com/api/v1/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         service = retrofit.create(Manager.class);
@@ -128,13 +128,14 @@ public class GeneralActivity extends AppCompatActivity {
                                 ships);
 //                    mySing.setMyUser(user);
 
-//                        Log.i("Alo efefefef IS", fleet.getShips().get(2).getAmount().toString());
-                        Toast.makeText(GeneralActivity.this, "Vous avez "+ fleet.getShips().get(2).getAmount().toString()+" "+fleet.getShips().get(2).getName(),
-                                Toast.LENGTH_LONG).show();
-                        Toast.makeText(GeneralActivity.this, "Vous avez "+ fleet.getShips().get(1).getAmount().toString()+" "+fleet.getShips().get(1).getName(),
-                                Toast.LENGTH_LONG).show();
-                        Toast.makeText(GeneralActivity.this, "Vous avez "+ fleet.getShips().get(0).getAmount().toString()+" "+fleet.getShips().get(0).getName(),
-                                Toast.LENGTH_LONG).show();
+
+////                        Log.i("Alo efefefef IS", fleet.getShips().get(2).getAmount().toString());
+//                        Toast.makeText(GeneralActivity.this, "Vous avez "+ fleet.getShips().get(2).getAmount().toString()+" "+fleet.getShips().get(2).getName(),
+//                                Toast.LENGTH_LONG).show();
+//                        Toast.makeText(GeneralActivity.this, "Vous avez "+ fleet.getShips().get(1).getAmount().toString()+" "+fleet.getShips().get(1).getName(),
+//                                Toast.LENGTH_LONG).show();
+//                        Toast.makeText(GeneralActivity.this, "Vous avez "+ fleet.getShips().get(0).getAmount().toString()+" "+fleet.getShips().get(0).getName(),
+//                                Toast.LENGTH_LONG).show();
                     }
                     else{
                         Toast.makeText(GeneralActivity.this, (String)response.message(),

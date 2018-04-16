@@ -46,7 +46,7 @@ public class SignUpActivity extends AppCompatActivity {
 
 
                     Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl("https://outer-space-manager.herokuapp.com/api/v1/")
+                            .baseUrl("https://outer-space-manager-staging.herokuapp.com/api/v1/")
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     Manager service = retrofit.create(Manager.class);

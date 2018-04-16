@@ -6,18 +6,13 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.ArrayAdapter;
 
-import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.io.InputStream;
-import java.net.URI;
 import java.net.URL;
 import java.util.List;
 
@@ -53,7 +48,10 @@ public class Adapter extends ArrayAdapter<Building> {
         Building building = getItem(position);
         viewHolder.name.setText(building.name);
 
-        int totalTime = building.getTimeToBuildLevel0() + (building.getAmountOfEffectByLevel()*building.getLevel());
+        if(building.getMineralCostLevel0() != null){
+            int totalTime = building.getTimeToBuildLevel0() + (building.getAmountOfEffectByLevel()*building.getLevel());
+        }
+
 //
 //        viewHolder.progressBar.setProgress();
 
@@ -65,10 +63,10 @@ public class Adapter extends ArrayAdapter<Building> {
         }
 
         if(building.getBuilding() != true){
-            viewHolder.building.setText("Prêt à construire !");
+            viewHolder.building.setText("Ready to build !");
         }
         else{
-            viewHolder.building.setText("En cours de construction !");
+            viewHolder.building.setText("Under construction !");
             viewHolder.level.setText(building.level.toString() + "-->" + (building.level + 1));
         }
 

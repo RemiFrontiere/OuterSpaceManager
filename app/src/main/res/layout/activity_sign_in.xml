@@ -4,18 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_dark"
+    android:background="@mipmap/background_space_2"
     tools:context="frontiere.com.outerspacemanager.outerspacemanager.SignInActivity">
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -30,8 +32,10 @@
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Identifiant"
-                android:textColor="@android:color/background_light" />
+                android:text="Login"
+                android:textColor="@android:color/background_light"
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/identifiantEditText"
@@ -40,7 +44,9 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:textColor="@android:color/background_light" />
+                android:textColor="@android:color/background_light"
+                android:textSize="20sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -53,8 +59,10 @@
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Mot de passe"
-                android:textColor="@android:color/background_light" />
+                android:text="Password"
+                android:textColor="@android:color/background_light"
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/PasswordEditText"
@@ -63,7 +71,9 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="textWebPassword"
-                android:textColor="@android:color/background_light" />
+                android:textColor="@android:color/background_light"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -71,16 +81,26 @@
             android:id="@+id/btValider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="2dp"
             android:layout_weight="1"
-            android:text="Valider"
-            android:textAlignment="center" />
+            android:background="?attr/colorControlHighlight"
+            android:text="Connect"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btCreate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="2dp"
             android:layout_weight="1"
-            android:text="Pas de compte ?"
-            android:textAlignment="center" />
+            android:background="?attr/colorControlHighlight"
+            android:text="Sign Up"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
