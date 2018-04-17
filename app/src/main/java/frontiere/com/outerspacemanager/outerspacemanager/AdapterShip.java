@@ -60,10 +60,10 @@ public class AdapterShip extends ArrayAdapter<Ship> {
                 viewHolder.image.setImageResource(R.drawable.lourd);
                 break;
             case "Sonde d'espionnage":
-                viewHolder.image.setImageResource(R.drawable.sonde);
+                viewHolder.image.setImageResource(R.drawable.espion);
                 break;
             case "Destroyer":
-                viewHolder.image.setImageResource(R.drawable.destroy);
+                viewHolder.image.setImageResource(R.drawable.destroyer);
                 break;
             case "Etoile de la mort":
                 viewHolder.image.setImageResource(R.drawable.etoile);
