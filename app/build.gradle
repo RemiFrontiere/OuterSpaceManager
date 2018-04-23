@@ -32,8 +32,6 @@ dependencies {
     compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
     compile 'com.squareup.okhttp:okhttp:2.5.0'
     compile 'com.github.bumptech.glide:glide:3.8.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC0'
     compile 'com.android.support:support-v4:26.1.0'
     compile "com.android.support:appcompat-v7:26.1.0"
-    compile "com.android.support:support-fragment:26.1.0"
 }

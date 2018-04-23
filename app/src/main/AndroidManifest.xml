@@ -23,7 +23,7 @@
         <activity android:label="Outer Space Manager" android:name=".SignUpActivity" />
         <activity android:label="Galaxy" android:name=".GalaxieActivity" />
         <activity android:label="General View" android:name=".GeneralActivity" />
-        <!--<activity android:name=".FleetActivity" />-->
+        <activity android:name=".FleetActivity" android:label="Fleet"/>
         <activity android:label="Space Shipyard" android:name=".ChantierSpatialActivity"></activity>
     </application>
 
