@@ -7,6 +7,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,11 +73,11 @@ public class AdapterShip extends ArrayAdapter<Ship> {
         //getItem(position) va récupérer l'item [position] de la List<Tweet> tweets
         final Ship ship = getItem(position);
         viewHolder.name.setText(ship.getName());
-        viewHolder.gas.setText("GasCost: "+ship.getGasCost().toString());
-        viewHolder.mineral.setText("MineralCost: "+ship.getMineralCost().toString());
+        viewHolder.gas.setText("Gas: "+ship.getGasCost().toString());
+        viewHolder.mineral.setText("Mineral: "+ship.getMineralCost().toString());
 
         viewHolder.speed.setText("Speed: "+ship.getSpeed().toString());
-        viewHolder.maxAttack.setText("maxAttack: "+ship.getMaxAttack().toString());
+        viewHolder.maxAttack.setText("MaxAttack: "+ship.getMaxAttack().toString());
         viewHolder.life.setText("Life: "+ship.getLife().toString());
         viewHolder.shield.setText("Shield: "+ship.getShield().toString());
 
@@ -113,6 +115,7 @@ public class AdapterShip extends ArrayAdapter<Ship> {
 
                 HashMap<String, String> amount = new HashMap<>();
                 amount.put("amount", Integer.toString(finalViewHolder1.seek.getProgress()));
+                finalViewHolder1.seek.getProgressDrawable().setColorFilter(Color.parseColor("#33cc33"), PorterDuff.Mode.SRC_ATOP);
 
                 Call<Ships> request = service.createship(mySing.getMyToken(), ship.getShipId().toString(), amount);
                 Log.i("x", ship.getShipId().toString());

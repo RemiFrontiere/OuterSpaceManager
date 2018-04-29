@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://C:\Users\rfrontiere\AndroidStudioProjects\OuterSpaceManager2\OuterSpaceManager.iml" filepath="C:\Users\rfrontiere\AndroidStudioProjects\OuterSpaceManager2\OuterSpaceManager.iml" />
-      <module fileurl="file://$PROJECT_DIR$/OuterSpaceManager2.iml" filepath="$PROJECT_DIR$/OuterSpaceManager2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OuterSpaceManager.iml" filepath="$PROJECT_DIR$/OuterSpaceManager.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

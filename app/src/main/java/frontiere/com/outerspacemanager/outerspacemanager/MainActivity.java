@@ -116,19 +116,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        fleet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent =  new Intent(MainActivity.this, FleetActivity.class);
-                startActivity(intent);
-            }
-        });
-        deco.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent =  new Intent(MainActivity.this, SignInActivity.class);
-                startActivity(intent);
-            }
-        });
+//        fleet.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent =  new Intent(MainActivity.this, FleetActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//        deco.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent =  new Intent(MainActivity.this, SignInActivity.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 }

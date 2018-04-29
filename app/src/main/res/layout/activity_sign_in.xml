@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:background="@drawable/bg4"
     tools:context="frontiere.com.outerspacemanager.outerspacemanager.SignInActivity">
 
     <LinearLayout
@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="2dp"
             android:layout_weight="1"
-            android:background="?attr/colorControlHighlight"
+            android:background="#64000000"
             android:text="Connect"
             android:textAlignment="center"
             android:textColor="@android:color/background_light"
@@ -96,7 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="2dp"
             android:layout_weight="1"
-            android:background="?attr/colorControlHighlight"
+            android:background="#64000000"
             android:text="Sign Up"
             android:textAlignment="center"
             android:textColor="@android:color/background_light"
