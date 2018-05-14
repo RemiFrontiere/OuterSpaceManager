@@ -77,20 +77,12 @@ public class FleetActivity extends AppCompatActivity{
 //                    mySing.setMyUser(user);
 
 
-
-//                        Toast.makeText(GeneralActivity.this, "Vous avez "+ fleet.getShips().get(2).getAmount().toString()+" "+fleet.getShips().get(2).getName(),
-//                                Toast.LENGTH_LONG).show();
-//                        Toast.makeText(GeneralActivity.this, "Vous avez "+ fleet.getShips().get(1).getAmount().toString()+" "+fleet.getShips().get(1).getName(),
-//                                Toast.LENGTH_LONG).show();
-//                        Toast.makeText(GeneralActivity.this, "Vous avez "+ fleet.getShips().get(0).getAmount().toString()+" "+fleet.getShips().get(0).getName(),
-//                                Toast.LENGTH_LONG).show();
-
-                        AdapterShip adapter = new AdapterShip(FleetActivity.this, ships);
+                        AdapterFleet adapter = new AdapterFleet(FleetActivity.this, ships,fleet);
                         listV.setAdapter(adapter);
 
-
-                        ArrayAdapter<Ship> myadapter = new ArrayAdapter<Ship>(FleetActivity.this, android.R.layout.simple_list_item_1, ships);
-                        listV.setAdapter(adapter);
+//
+//                        ArrayAdapter<Ship> myadapter = new ArrayAdapter<Ship>(FleetActivity.this, android.R.layout.simple_list_item_1, ships);
+//                        listV.setAdapter(adapter);
 
                     }
                     else{
