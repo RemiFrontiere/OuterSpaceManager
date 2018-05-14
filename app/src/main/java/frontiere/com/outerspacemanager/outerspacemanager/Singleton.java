@@ -25,6 +25,14 @@ public final class Singleton {
     private List<User> myUsers;
 
 
+    //private User targetUser;
+    public int espionValueForAttack = 0;
+    public int destroyerValueForAttack = 0;
+    public int chasseurLegerValueForAttack = 0;
+    public int chasseurLourdValueForAttack = 0;
+    public int etoileMortLourdValueForAttack = 0;
+
+
 //    private time
 
 
@@ -85,7 +93,6 @@ public final class Singleton {
             this.myUser = user;
         }
     }
-
 
     public Integer getMygaz() {
         return this.myGaz;

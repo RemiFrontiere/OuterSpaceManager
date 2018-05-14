@@ -1,11 +1,13 @@
 package frontiere.com.outerspacemanager.outerspacemanager;
 
+import java.io.Serializable;
+
 /**
  * Created by rfrontiere on 23/01/2018.
  */
 
 
-class User {
+class User implements Serializable {
     private String email;
     private String username;
     private String password;

@@ -27,6 +27,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class AdapterFleetAttack extends ArrayAdapter<Ship>{
     public Fleet myFleet;
     public Ship ship;
+    public AttackFleetViewHolder viewHolder;
 
     public AdapterFleetAttack(Context context, List<Ship> ships, Fleet fleet) {
         super(context, 0, ships);
@@ -41,7 +42,7 @@ public class AdapterFleetAttack extends ArrayAdapter<Ship>{
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.ship_attack,parent, false);
         }
 
-        AttackFleetViewHolder viewHolder = (AttackFleetViewHolder) convertView.getTag();
+        viewHolder = (AttackFleetViewHolder) convertView.getTag();
         if(viewHolder == null){
             viewHolder = new AttackFleetViewHolder();
             viewHolder.name = (TextView) convertView.findViewById(R.id.NameText);
@@ -65,10 +66,10 @@ public class AdapterFleetAttack extends ArrayAdapter<Ship>{
                                           boolean fromUser) {
 
                 finalViewHolder.amount.setText(Integer.toString(progress));
-                Toast.makeText(getContext(), finalViewHolder.name.toString(),
-                        Toast.LENGTH_LONG).show();
+//                Toast.makeText(getContext(), finalViewHolder.name.getText(),
+//                        Toast.LENGTH_LONG).show();
 
-                switch (finalViewHolder.name.toString()){
+                switch (finalViewHolder.name.getText().toString()){
                     case "Chasseur léger":
                         mySing.chasseurLegerValueForAttack = progress;
                         break;

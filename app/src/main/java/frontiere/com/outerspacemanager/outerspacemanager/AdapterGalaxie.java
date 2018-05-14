@@ -1,6 +1,9 @@
 package frontiere.com.outerspacemanager.outerspacemanager;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
@@ -10,9 +13,31 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static android.support.v4.content.ContextCompat.startActivity;
 
 /**
  * Created by rfrontiere on 23/01/2018.
@@ -58,7 +83,7 @@ public class AdapterGalaxie extends ArrayAdapter<User> {
         }
 
 
-        int randomNum = ThreadLocalRandom.current().nextInt(0, 3);
+        int randomNum = ThreadLocalRandom.current().nextInt(0, 1);
 
         switch (randomNum){
             case 0:
@@ -72,7 +97,14 @@ public class AdapterGalaxie extends ArrayAdapter<User> {
                 break;
         }
 
-
+//        final AdapterGalaxie.GalaxieViewHolder finalViewHolder1 = viewHolder;
+//        viewHolder.image.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent =  new Intent(v.getContext(), AttackActivity.class);
+//                v.getContext().startActivity(new Intent());
+//            }});
+//
         return convertView;
     }
 

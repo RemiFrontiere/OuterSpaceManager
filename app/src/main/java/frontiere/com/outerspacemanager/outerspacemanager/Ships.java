@@ -196,3 +196,13 @@ class Ship{
     }
 
 }
+
+class ShipAttack{
+    public Integer shipId;
+    public Integer amount;
+
+    public ShipAttack(int amou, int id){
+        shipId = id;
+        amount=amou;
+    }
+}

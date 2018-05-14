@@ -4,6 +4,7 @@ package frontiere.com.outerspacemanager.outerspacemanager;
  * Created by rfrontiere on 23/01/2018.
  */
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import retrofit2.Call;
@@ -32,6 +33,9 @@ public interface Manager {
 
     @GET("ships")
     Call<Ships> ships(@Header("x-access-token") String token);
+
+    @POST("fleet/attack/{userName}")
+    Call<Fleet> attackPlayer(@Path("userName") String userName,@Body HashMap<String, ArrayList<ShipAttack>> ships );
 
     @POST("buildings/create/{buildingId}")
     Call<Buildings> createbuilding(@Header("x-access-token") String token, @Path("buildingId") String buildingId);

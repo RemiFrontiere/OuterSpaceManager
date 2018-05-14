@@ -1,13 +1,21 @@
 package frontiere.com.outerspacemanager.outerspacemanager;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +27,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class GalaxieActivity extends AppCompatActivity {
     private ListView listView;
     private Singleton mySingleton;
+    private List<User> users = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +52,6 @@ public class GalaxieActivity extends AppCompatActivity {
                 Log.i("Alo RESPONSE IS", response.message());
 
                 if(response.isSuccessful()){
-
-
-                        List<User> users = new ArrayList<>();
 
                         for(int i = 0; i < response.body().getUsers().size(); i++){
                             users.add(new User(response.body().getUsers().get(i).getUsername(), (response.body().getUsers().get(i).getPoints().intValue())));
@@ -80,6 +86,20 @@ public class GalaxieActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Users> call, Throwable t) {
 
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                users.get(position);
+                Log.i("erreur", users.get(position).getUsername() );
+                Intent intent =  new Intent(GalaxieActivity.this, AttackActivity.class);
+
+
+                intent.putExtra("user", users.get(position));
+                startActivity(intent);
             }
         });
     }
